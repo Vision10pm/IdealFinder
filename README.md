@@ -18,7 +18,7 @@
 
 ## Tech Stack
 
-<img src="https://github.com/Vision10pm/IdealFinder/blob/main/docu/img/tech_stack.png">
+<img src="https://github.com/Vision10pm/IdealFinder/blob/main/docu/img/tech_stack_2.png">
 <br>
 <br>
 
