@@ -1,0 +1,13 @@
+@import url("myidol.css");
+h3.idol-name {
+  text-align: center;
+}
+#container > article.idol {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+#container .idol .imgBox {
+  width: 40%;
+  padding: 5vh 0;
+}

@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'myidol/head.html' %}
+  </head>
+  <body>
+    {% include 'myidol/header.html' %}
+    <div id="container">
+      <!-- <h3 class="stage">Stage. {{stage}}</h3> -->
+      <article class="idol">
+        {% for c in candidate %}
+        <div class="imgBox">
+          <h3 class="idol-name">{{c.name}}</h3>
+          <a href="{{chain_page}}?gender={{gender}}&choices={{c.choices}}">
+            <img
+              src="{% static 'img/' %}{{gender}}/{{c.file_name}}"
+              alt="{{c.name}}"
+            />
+          </a>
+        </div>
+        {% endfor %}
+      </article>
+    </div>
+    {% include 'myidol/script.html' %}
+  </body>
+</html>

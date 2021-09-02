@@ -1,0 +1,351 @@
+@charset "UTF-8";
+
+
+
+body {
+}
+
+.header {
+    position: relative;
+    display: block;
+    height: 40px;
+    margin: 2.5% 37%;
+    text-align: center;
+    font-size: 40px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+/* 로고 */
+
+.logo {
+    display: block;
+    float: right;
+
+}
+
+.logo img {
+    position: a;
+    display: block;
+    width: 150px;
+    object-fit: cover;
+    left: 0px;
+}
+
+
+/* 포토 3 메인 */
+.photos {
+    position: relative;
+    display: block;
+    height: 540px;
+    margin: 2% 50%;
+
+}
+
+.photos .moveview {
+    position: absolute;
+    transform: translateX(-50%);
+
+}
+
+.photos .view_1 {
+    left: -200px;
+    top: 10px;
+}
+
+.photos .view_1 {
+    left: -200px;
+    top: 10px;
+    z-index: 1;
+}
+
+.photos .view_2 {
+    top: 70px;
+    z-index: 2;
+}
+
+.photos .view_3 {
+    left: 200px;
+    top: 10px;
+    z-index: 1;
+}
+
+.viewBox {
+    position: relative;
+    border: 2px solid;
+    border-radius: 30px;
+    padding: 15px;
+    background-color: white;
+
+}
+
+.viewBox .photo_img img {
+    border-radius: 30px;
+}
+
+.shadow_main {
+    background: white;
+    width: 500px;
+    height: 100px;
+    top: 420px;
+    border-top-left-radius: 410px 110px;
+    border-top-right-radius: 410px 110px;
+    border-bottom-left-radius: 410px 110px;
+    border-bottom-right-radius: 410px 110px;
+    box-shadow: 0px 15px 15px 15px gray;
+
+}
+
+/* selectBoxMK */
+.selectBoxMk {
+    border: 2px solid;
+    border-radius: 30px;
+    padding: 15px;
+    background-color: beige;
+}
+
+.selectBoxMK .boxCrown {
+    position: absolute;
+    width: 80px;
+    background-color: white;
+    display: inline-block;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -40px;
+
+
+}
+
+.selectBoxMK .boxCrown img {
+    width: 50px;
+    background-color: white;
+}
+
+.selectBoxMK .viewBox:active {
+    border: 3px solid red;
+}
+
+
+.select_1 {
+    left: 200px;
+
+}
+
+#togleBtn_1:checked ~ .select_1 .viewBox {
+    border: 3px solid red;
+    box-shadow: 0px 0px 30px yellow;
+}
+
+.select_2 {
+    left: -200px;
+}
+
+#togleBtn_2:checked ~ .select_2 .viewBox {
+    border: 3px solid red;
+    box-shadow: 0px 0px 30px yellow;
+}
+
+/* rank box */
+
+
+/* selectBoxMK */
+.rankBoxMK {
+}
+
+.rankBoxMK .boxCrown {
+    position: absolute;
+    width: 80px;
+    background-color: white;
+    display: inline-block;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -40px;
+}
+
+.rankBoxMK .boxCrown img {
+    width: 50px;
+    background-color: white;
+}
+.rankBoxMK .viewBox {
+    box-shadow: 0px 0px 30px yellow;
+}
+
+.rank_icon {
+    position: absolute;
+    top: 200px;
+    transform: translateX(-50%);
+    
+        
+}
+
+.rank_1 {
+    top :-100px;
+    left: -40px;
+}
+.rank_2 {
+    top: 20px;
+    right: 110px;
+}
+.rank_2 .viewBox{
+    padding: 12px;
+}
+.rank_2 .viewBox img {
+    width: 200px;
+}
+.rank_3 {
+    top: 160px;
+    left: 250px;
+}
+
+.rank_3 .viewBox{
+    padding: 8px;
+}
+.rank_3 .viewBox img {
+    width: 150px;
+}
+
+.rank_4 {
+    top: 350px;
+    left: 520px;
+    
+}
+.rank_4 .viewBox{
+    padding: 8px;
+}
+.rank_4 .viewBox img {
+    width: 100px;
+}
+.rank_5 {
+    top: 350px;
+    left: 650px;
+}
+
+.rank_5 .viewBox{
+    padding: 8px;
+}
+.rank_5 .viewBox img {
+    width: 100px;
+}
+/* 버튼 테일 */
+
+.tail {
+    position: relative;
+    display: block;
+    height: 40px;
+    margin: 2.5% 37%;
+    text-align: center;
+
+}
+/* start BT */
+.startBT {
+    position: relative;
+    background-color: rgb(98, 151, 232);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    line-height: 400%;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.startBT:hover {
+    background-color: rgb(193, 223, 247);
+    box-shadow: 0px 0px 60px yellow;
+}
+
+.startBT .startBT_text {
+    margin: 2px;
+    border: 4px dashed white;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+}
+
+
+
+/* select BT */
+.SelectBT {
+    position: relative;
+    background-color: rgb(98, 151, 232);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    line-height: 400%;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.SelectBT:hover {
+    background-color: rgb(193, 223, 247);
+    box-shadow: 0px 0px 60px yellow;
+}
+.SelectBT:active {
+    background-color: red;
+    animation: vibration 0.5s;
+}
+.SelectBT .SelectBT_text {
+    margin: 2px;
+    border: 4px dashed white;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.SelcetBT:active {
+    background-color: red;    
+}
+
+/* rank BT */
+.rankBT {
+    position: relative;
+    background-color: rgb(249,223,123);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    line-height: 400%;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.rankBT:hover {
+    background-color: rgb(193, 223, 247);
+    box-shadow: 0px 0px 60px yellow;
+}
+
+.rankBT .rankBT_text {
+    margin: 2px;
+    border: 4px dashed white;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* animation */
+
+@keyframes vibration {
+  0% { transform: translate(1px, 1px) rotate(0deg) translateX(-50%); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg) translateX(-50%); }
+  20% { transform: translate(-3px, 0px) rotate(1deg) translateX(-50%); }
+  30% { transform: translate(3px, 2px) rotate(0deg) translateX(-50%); }
+  40% { transform: translate(1px, -1px) rotate(1deg) translateX(-50%); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg) translateX(-50%); }
+  60% { transform: translate(-3px, 1px) rotate(0deg) translateX(-50%); }
+  70% { transform: translate(3px, 1px) rotate(-1deg) translateX(-50%); }
+  80% { transform: translate(-1px, -1px) rotate(1deg) translateX(-50%); }
+  90% { transform: translate(1px, 2px) rotate(0deg) translateX(-50%); }
+  100% { transform: translate(1px, -2px) rotate(-1deg) translateX(-50%); }
+}
+
+
+canvas {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

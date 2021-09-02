@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'myidol/head.html' %}
+  </head>
+  <body>
+    {% include 'myidol/header.html' %}
+    <div id="container">
+      <h3 class="title center">당신의 이상형은 누구?!</h3>
+      <div class="who-icon">
+        <img
+          src="{% static 'img/free-icon-suspect-3208805.svg' %}"
+          alt=""
+          srcset=""
+        />
+      </div>
+      <p>어떤 성별을 찾고 싶으신가요?</p>
+      <a href="{{next_point}}?gender=female" class="button w-80">여성</a>
+      <a href="{{next_point}}?gender=male" class="button w-80">남성</a>
+    </div>
+    {% include 'myidol/script.html' %}
+  </body>
+  <div class="hidden">
+    아이콘 제작자
+    <a href="https://www.freepik.com" title="Freepik">Freepik</a>
+    from
+    <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a>
+  </div>
+</html>

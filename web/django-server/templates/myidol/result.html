@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'myidol/head.html' %}
+  </head>
+  <body>
+    {% include 'myidol/header.html' %}
+    <div id="container">
+      <p class="rank-icon">
+        <img src="{% static 'img/rank.svg' %}" alt="" />
+      </p>
+      <ul class="rank">
+        {% for i, v in ideals.items %}
+
+        <li class="item">
+          <div class="imgBox">
+            <h3 class="idol-name">{{v.name}}</h3>
+            <img
+              src="{% static 'img/' %}{{gender}}/{{v.get_file_name}}"
+              alt=""
+            />
+          </div>
+        </li>
+        {%endfor%}
+        <!--
+        <li class="item second">
+          <p class="idol-name">{{second.name}}</p>
+          <img
+            src="{% static 'img/' %}{{second.data_id}}.{{second.type}}"
+            alt=""
+          />
+        </li>
+        <li class="item first">
+          <p class="idol-name">{{first.name}}</p>
+          <img
+            src="{% static 'img/' %}{{first.data_id}}.{{first.type}}"
+            alt=""
+          />
+        </li>
+        <li class="item third">
+          <p class="idol-name">{{third.name}}</p>
+          <img
+            src="{% static 'img/' %}{{third.data_id}}.{{third.type}}"
+            alt=""
+          />
+        </li>
+        <li class="item fifth">
+          <p class="idol-name">{{fifth.name}}</p>
+          <img
+            src="{% static 'img/' %}{{fifth.data_id}}.{{fifth.type}}"
+            alt=""
+          />
+        </li> -->
+      </ul>
+      <a href="/" class="button w-80"
+        ><span>Retry</span
+        ><img class="icon" src="{% static 'img/reload.svg' %}"
+      /></a>
+      <a href="/" class="button w-80"
+        ><span>Go to APP</span
+        ><img class="icon" src="{% static 'img/go.svg' %}"
+      /></a>
+    </div>
+    {% include 'myidol/script.html' %}
+  </body>
+</html>

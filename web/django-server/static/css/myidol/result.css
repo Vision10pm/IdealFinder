@@ -1,0 +1,36 @@
+@import url("myidol.css");
+@import url("process.css");
+
+p.rank-icon {
+  width: 15%;
+  margin: 0 auto;
+}
+
+ul.rank {
+  display: flex;
+  justify-content: space-evenly;
+  /* grid: 1 5; */
+}
+ul.rank li.item {
+  align-self: center;
+  padding: 5px;
+}
+/* ul.rank li.item p.idol-name {
+  text-align: center;
+} */
+
+.first {
+  width: 40%;
+}
+.second {
+  width: 15%;
+}
+.third {
+  width: 15%;
+}
+.fourth {
+  width: 15%;
+}
+.fifth {
+  width: 15%;
+}
