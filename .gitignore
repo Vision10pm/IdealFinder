@@ -1,0 +1,11 @@
+.config_secret
+.vscode
+.dockerignore
+*.jpg
+*.svg
+*.csv
+data
+db.sqlite3
+Dockerfile
+*.ini
+*.yml
