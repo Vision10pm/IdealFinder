@@ -5,7 +5,6 @@
 *.svg
 *.csv
 data
-db.sqlite3
 Dockerfile
 *.ini
 *.yml
