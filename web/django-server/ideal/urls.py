@@ -22,6 +22,7 @@ import ideal.views as root_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path('myidol_v2', include('myidol_v2.urls')),
     path('myidol/', include('myidol.urls')),
     path('', include('myidol.urls')),
 ]

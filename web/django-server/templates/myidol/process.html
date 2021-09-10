@@ -9,7 +9,7 @@
     <div id="container">
       <!-- <h3 class="stage">Stage. {{stage}}</h3> -->
       <article class="idol">
-        {% for c in candidate %}
+        {% for c in images_li %} {{ forloop.counter }}
         <div class="imgBox">
           <h3 class="idol-name">{{c.name}}</h3>
           <a href="{{chain_page}}?gender={{gender}}&choices={{c.choices}}">

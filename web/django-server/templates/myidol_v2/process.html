@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    {% include 'myidol_v2/head.html' %}
+  </head>
+
+  <body>
+    <header>{% include 'myidol_v2/header.html' %}</header>
+    <div class="line">
+      <div class="lineBr">
+        <p style="color: white">line</p>
+      </div>
+    </div>
+    <div class="header">
+      <div class="header_title"></div>
+    </div>
+    <article class="container">
+      {% csrf_token %}
+      <div class="photos">
+        {% for c, v in cluster_info_dict.items %}
+        <div class="grid-item">
+          <input
+            type="checkbox"
+            id="togleBtn_{{forloop.counter}}"
+            class="input-checkbox"
+            style="visibility: hidden; position: absolute"
+            data-value="{{v.data}}"
+            data-id="{{v.image_info.id}}"
+          />
+          <label
+            for="togleBtn_{{forloop.counter}}"
+            class="select_{{forloop.counter}} selectBoxMK moveview"
+          >
+            <div class="viewBox">
+              <div class="boxCrown">
+                <img src="{% static 'img' %}/free-icon-crown-679660.png" />
+              </div>
+              <div class="photo_img">
+                <img
+                  id="imageTest"
+                  src="{% static 'img' %}/{{v.image_info.gender}}/{{v.image_info.get_file_name}}"
+                />
+              </div>
+            </div>
+          </label>
+        </div>
+        {% endfor %}
+      </div>
+      <input
+        type="text"
+        name="stage"
+        style="visibility: hidden"
+        value="{{stage}}"
+      />
+    </article>
+    <div class="tail">
+      <div class="SelectBT">
+        <div class="SelectBT_text">
+          <p>선택</p>
+        </div>
+      </div>
+    </div>
+    {% include 'myidol_v2/script.html' %}
+  </body>
+</html>

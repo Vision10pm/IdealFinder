@@ -9,5 +9,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('myidol/', include('myidol.urls')),
-    path('', lambda x: HttpResponseRedirect('myidol')),
+    path('myidol_v2/', include('myidol_v2.urls')),
+    path('', lambda x: HttpResponseRedirect('myidol_v2')),
 ]
