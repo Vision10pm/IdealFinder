@@ -1,6 +1,9 @@
 from abc import *
-import os, random
+import os, random, json
+
+from django.http.response import JsonResponse
 from myidol.models import ClusterInfo, ImageInfo
+from django.shortcuts import redirect, render
 
 class App:
     def __init__(self):
@@ -44,16 +47,13 @@ class ImageResponse(Response):
                 next_choice = self.choices + str(i)
                 i_cluster = curr_cluster.filter(cluster__startswith=next_choice)
                 curr_cand = i_cluster[random.randint(0, len(i_cluster)-1)]
-                print(curr_cand)
                 self.cluster_info_li.append(curr_cand)
             except Exception as e:
                 print(e)
     def post_images(self, gender='male', params=None):
-        # print(params)
         i = 0
-        for k, v in params.items():
-            print(v)
-            self.cluster_info_dict[i] = {'image_info': ImageInfo.objects.get(id=k), 'data': list(v)}
+        for k, v in params['cluster_info'].items():
+            self.cluster_info_dict[i] = {'image_info': ImageInfo.objects.get(id=v.get('sample')[0]), 'nearest': [ImageInfo.objects.get(id=id) for id in v.get('nearest')], 'data': v.get('ids').tolist()}
             i += 1
     
 class Image:
@@ -81,17 +81,20 @@ class ProcessResponse(ImageResponse):
         self.css = 'process'
         self.chain_page = 'process'
         self.next_point = 'result'
-        self.stage = 1
+        self.template = 'process_response.html'
         for k,v in kwagrs.items():
             setattr(self, k, v)
+        
+        self.get_images(self.gender, self.choices)
+        self.post_images(self.gender, params=self.params)
+        if self.params.get('result') == True:
+            self.template = 'result.html'
+        print(self.params.get('result'))
+        print(self.template)
+        self.render = render(self.request, f'myidol_v2/{self.template}', context=self.__dict__)
 
-        if self.params == False:
-            self.chain_page = self.next_point
-            self.tamplate = 'result'
-        else:
-            self.get_images(self.gender, self.choices)
-            self.post_images(self.gender, params=self.params)
-
+    def json_reponse(self):
+        return JsonResponse({'result': self.params.get('result'), 'render': self.render.content.decode('utf-8')})
 class ResultReponse(ImageResponse):
     def __init__(self, **kwargs):
         super().__init__()

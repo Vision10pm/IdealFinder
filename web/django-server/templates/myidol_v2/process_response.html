@@ -29,4 +29,17 @@
   </div>
   {% endfor %}
 </div>
+<div class="candidate hidden">
+  {% for c, v in cluster_info_dict.items %}
+  <div class="cluster-imgs">
+    {%for img in v.nearest%}
+    <img
+      class="cand-{{forloop.counter}}"
+      src="{% static 'img' %}/{{img.gender}}/{{img.get_file_name}}"
+      alt=""
+    />
+    {%endfor%}
+  </div>
+  {% endfor %}
+</div>
 <input type="text" name="stage" style="visibility: hidden" value="{{stage}}" />

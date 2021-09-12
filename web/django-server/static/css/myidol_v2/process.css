@@ -1,1 +1,53 @@
 @import url("index.css");
+@import url("reset.css");
+
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 80%;
+  margin: 0 auto;
+}
+.grid-item:first-child:nth-last-child(8),
+.grid-item:first-child:nth-last-child(8) ~ .grid-item {
+  width: 25%;
+}
+
+.grid-item:first-child:nth-last-child(6),
+.grid-item:first-child:nth-last-child(6) ~ .grid-item {
+  width: 33%;
+}
+
+.grid-item:first-child:nth-last-child(4),
+.grid-item:first-child:nth-last-child(4) ~ .grid-item {
+  width: 50%;
+}
+
+.grid-item:first-child:nth-last-child(2),
+.grid-item:first-child:nth-last-child(2) ~ .grid-item {
+  width: 50%;
+}
+
+.candidate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  background-color: black;
+  z-index: 999;
+}
+
+.cluster-imgs {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.cluster-imgs > img {
+  width: 15%;
+}
+
+img.cand-1 {
+  width: 20%;
+}

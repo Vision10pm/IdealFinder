@@ -29,30 +29,32 @@ class process(APIView):
             ids.append(embedding.image_id_id)
             embeddings.append(json.loads(embedding.embedding))
         kmean_result = myidol_v2.modules.get_response(ids=ids, embeddings=embeddings)
-        pro_response = ProcessResponse(gender=gender, params = kmean_result, choices='')
-        # print(pro_response.__dict__)
+        pro_response = ProcessResponse(request=request, gender=gender, params = kmean_result, choices='', stage=1)
         return render(request, 'myidol_v2/process.html', context=pro_response.__dict__)
 
     def post(self, request):
+        gender = request._request.GET.get("gender")
         json_body = json.loads(request.body)
         prev_stage = int(json_body.get('stage', 1))
         print('prev stage:', json_body.get('stage'))
-        curr_selected_img = []
+        curr_selected_sample = []
         selected_ids = []
         selected_embeddings = []
-        for k, v in json_body.items():
+        for k, v in json_body.get('selected').items():
             try:
                 selected_ids.extend(list(map(int, v[1:-1].split(", "))))
-                curr_selected_img.append(int(k))
+                curr_selected_sample.append((int(k), json.loads(EmbeddingInfo.objects.get(image_id_id = int(k)).embedding)))
             except Exception as e:
                 print(e)
         for id in selected_ids:
-            print(id)
             selected_embeddings.append(json.loads(EmbeddingInfo.objects.get(image_id_id=id).embedding))
-        kmean_result = myidol_v2.modules.get_response(ids=selected_ids, embeddings=selected_embeddings, stage=prev_stage+1)
-        pro_response = ProcessResponse(gender="None", params = kmean_result, choices='')
-        pro_response.stage = prev_stage+1
-        return render(request, 'myidol_v2/process_response.html', context=pro_response.__dict__)
+        kmean_result = myidol_v2.modules.get_response(ids=selected_ids, embeddings=selected_embeddings, stage=prev_stage+1, choices=curr_selected_sample)
+        pro_response = ProcessResponse(request=request, gender=gender, params = kmean_result, choices='', stage=prev_stage+1)
+        return pro_response.json_reponse()
+        if pro_response.params.get('result'):
+            return render(request, 'myidol_v2/result.html', context=pro_response.__dict__)
+        else:
+            return render(request, 'myidol_v2/process_response.html', context=pro_response.__dict__)
 
 
 class Result(APIView):

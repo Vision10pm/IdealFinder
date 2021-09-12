@@ -1,15 +1,14 @@
 function post() {
-  //   console.log(document.querySelectorAll("input:checked"));
   var checkedInput = document.querySelectorAll("input:checked");
   var stage = document.querySelector("input[name=stage]").value;
   var data = {};
+  data["selected"] = {};
   for (input of checkedInput) {
-    data[input.dataset.id] = input.dataset.value;
+    data["selected"][input.dataset.id] = input.dataset.value;
   }
   data["stage"] = stage;
 
   data = JSON.stringify(data).replace("\n", "");
-  console.log(data);
   fetch("", {
     body: data,
     headers: {
@@ -17,10 +16,16 @@ function post() {
     },
     method: "post",
   })
-    .then((res) => res.text())
-    .then(
-      (res) => (document.querySelector("article.container").innerHTML = res)
-    );
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.result == false) {
+        document.querySelector("article.container").innerHTML = res.render;
+      } else {
+        document.querySelector("div.container-wrapper").innerHTML = res.render;
+      }
+    });
+  document.querySelector(".candidate").classList.toggle("hidden");
 }
 
 document.querySelector(".SelectBT_text>p").addEventListener("click", post);
