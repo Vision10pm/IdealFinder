@@ -18,9 +18,11 @@ def kmeans(n_clusters=5, ids=[], embeddings=[]):
 
 def get_response(ids=[], embeddings=[], stage=1, choices=[]):
     stages = [8, 6, 4, 2, 1]
-    if stage == len(stages)+1:
-        return False
-    clusters = kmeans(n_clusters=stages[stage-1], ids=ids, embeddings=embeddings)
+    result_check = (stage == len(stages) or len(embeddings) <= stages[stage-1])
+    if result_check:
+        clusters = np.array([[ids, embeddings]])
+    else:
+        clusters = kmeans(n_clusters=stages[stage-1], ids=ids, embeddings=embeddings)
     response = {}
     response['cluster_info'] = {}
     for i, c in enumerate(clusters):
@@ -28,12 +30,12 @@ def get_response(ids=[], embeddings=[], stage=1, choices=[]):
         c = list(zip(cluster_ids, cluster_embeddings))
         if stage == len(stages):
             sampled = choices
-            print(sampled)
         else:
             sampled = random.sample(c,1)
         nearest = [n[0] for n in get_near_five(center=sampled, cluster=c)]
         response['cluster_info'][i] = {'sample': [s[0] for s in sampled], 'nearest': nearest, 'ids': cluster_ids}
-    response['result'] = True if stage == len(stages) else False
+        response['result'] = result_check
+    print(response)
     return response
 
 def euclidean_dist(inst1, inst2):

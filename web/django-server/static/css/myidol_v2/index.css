@@ -8,6 +8,11 @@
   padding: 0;
   height: fit-content;
 }
+a {
+  text-decoration: none;
+  color: unset;
+}
+
 body {
   margin: 0 auto;
   width: 100%;
@@ -47,32 +52,6 @@ body {
 article.container {
   width: 100%;
 }
-.photos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  width: 80%;
-  margin: 0 auto;
-}
-.grid-item:first-child:nth-last-child(8),
-.grid-item:first-child:nth-last-child(8) ~ .grid-item {
-  width: 25%;
-}
-
-.grid-item:first-child:nth-last-child(6),
-.grid-item:first-child:nth-last-child(6) ~ .grid-item {
-  width: 33%;
-}
-
-.grid-item:first-child:nth-last-child(4),
-.grid-item:first-child:nth-last-child(4) ~ .grid-item {
-  width: 50%;
-}
-
-.grid-item:first-child:nth-last-child(2),
-.grid-item:first-child:nth-last-child(2) ~ .grid-item {
-  width: 50%;
-}
 
 /* .photos > label {
   min-width: 20%;
@@ -80,56 +59,41 @@ article.container {
   max-width: 30%;
   width: fit-content;
 } */
-/* .photos .moveview { */
-/* position: absolute; */
-/* transform: translateX(-50%); */
-/* } */
-
-.photos .view_1 {
-  left: -200px;
-  top: 10px;
-}
-
-/* .photos .view_1 { */
-/* left: -200px; */
-/* margin-left: -200px; */
-/* top: 10px; */
-/* z-index: 1; */
-/* } */
-
-/* .photos .view_2 { */
-/* top: 70px; */
-/* z-index: 2; */
-/* } */
-
-/* .photos .view_3 { */
-/* left: 200px; */
-/* top: 10px; */
-/* z-index: 1; */
-/* } */
-
-.grid-item > label {
-  width: 100%;
-}
-.grid-item label .viewBox {
-  width: 100%;
-  border: 2px solid;
-  border-radius: 30px;
-  padding: 15px;
-  background-color: white;
-}
-
-.grid-item label .viewBox .photo_img {
+/* .photos .moveview {
+  position: absolute;
+  transform: translateX(-50%);
+}*/
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 80%;
   margin: 0 auto;
 }
 
-.grid-item label .viewBox .photo_img img {
-  width: 100%;
-  border-radius: 30px;
+.photos .view_1 {
+  width: 30%;
+  /* left: -200px; */
+  top: 10px;
+  z-index: 1;
+}
+
+.photos .view_2 {
+  width: 30%;
+  margin-left: -200px;
+  top: 70px;
+  z-index: 2;
+}
+
+.photos .view_3 {
+  width: 30%;
+  left: 200px;
+  top: 10px;
+  z-index: 1;
 }
 
 .shadow_main {
+  margin: 0 auto;
   background: white;
   width: 500px;
   height: 100px;

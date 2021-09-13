@@ -1,34 +1,43 @@
 {% load static %}
 <div class="photos">
   <div class="rank_icon">
-    <img src="img/icon/rank.PNG" />
+    <img src="img/icon/rank.PNG"/>
   </div>
   <div class="photos">
     <div class="rank_icon">
-      <img src="img/icon/rank.PNG" />
+      <img src="img/icon/rank.PNG"/>
     </div>
-    {% with cluster_info_dict.0.nearest|slice:":-1" as n %} {% for img in n %}
-    <div class="rank_{{forloop.counter}} rankBoxMK moveview">
-      <div class="viewBox">
-        <div class="boxCrown">
-          <img src="img/icon/crown.png" />
+    {%with cluster_info_dict.0.nearest as n%}
+    {%for img in n%}
+      {%if forloop.counter < 6%}
+        <div class="rank_{{forloop.counter}} rankBoxMK moveview">
+          <div class="viewBox">
+            <div class="boxCrown">
+              <img src="img/icon/crown.png"/>
+            </div>
+            <div class="photo_img">
+              <img id="imageTest" src="{% static 'img/' %}/{{gender}}/{{img.get_file_name}}"/>
+            </div>
+          </div>
         </div>
-        <div class="photo_img">
-          <img
-            id="imageTest"
-            src="{% static 'img/' %}/{{gender}}/{{img.get_file_name}}"
-          />
-        </div>
+        {%endif%}
+      {% endfor %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="tail">
+    <div class="rankBT">
+      <div class="rankBT_text">
+        <p>
+          <a href="/">메인으로</a>
+        </p>
       </div>
     </div>
-    {% endfor %} {% endwith %}
-  </div>
-</div>
-<div class="tail">
-  <div class="SelectBT">
-    <div class="SelectBT_text">
-      <p><a href="/">메인으로</a></p>
-      <p><a href="">다시 시작</a></p>
+    <div class="rankBT">
+      <div class="rankBT_text">
+        <p>
+          <a href="">다시 시작</a>
+        </p>
+      </div>
     </div>
   </div>
-</div>

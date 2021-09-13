@@ -2,30 +2,35 @@ function post() {
   var checkedInput = document.querySelectorAll("input:checked");
   var stage = document.querySelector("input[name=stage]").value;
   var data = {};
-  data["selected"] = {};
-  for (input of checkedInput) {
-    data["selected"][input.dataset.id] = input.dataset.value;
-  }
-  data["stage"] = stage;
+  if (checkedInput.length == 0) {
+    alert("이상형을 선택해주세요!");
+  } else {
+    data["selected"] = {};
+    for (input of checkedInput) {
+      data["selected"][input.dataset.id] = input.dataset.value;
+    }
+    data["stage"] = stage;
 
-  data = JSON.stringify(data).replace("\n", "");
-  fetch("", {
-    body: data,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "post",
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      console.log(res);
-      if (res.result == false) {
-        document.querySelector("article.container").innerHTML = res.render;
-      } else {
-        document.querySelector("div.container-wrapper").innerHTML = res.render;
-      }
-    });
-  document.querySelector(".candidate").classList.toggle("hidden");
+    data = JSON.stringify(data).replace("\n", "");
+    fetch("", {
+      body: data,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "post",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        if (res.result == false) {
+          document.querySelector("article.container").innerHTML = res.render;
+        } else {
+          document.querySelector("div.container-wrapper").innerHTML =
+            res.render;
+        }
+      });
+    document.querySelector(".candidate").classList.toggle("hidden");
+  }
 }
 
 document.querySelector(".SelectBT_text>p").addEventListener("click", post);
