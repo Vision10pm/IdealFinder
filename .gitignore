@@ -4,7 +4,9 @@
 *.jpg
 *.svg
 *.csv
+db.sqlite3
 data
 Dockerfile
 *.ini
 *.yml
+*.pyc
