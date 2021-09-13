@@ -41,7 +41,7 @@
 
 .grid-item:first-child:nth-last-child(4),
 .grid-item:first-child:nth-last-child(4) ~ .grid-item {
-  width: 50%;
+  width: 34%;
 }
 
 .grid-item:first-child:nth-last-child(2),
@@ -73,4 +73,9 @@
 
 img.cand-1 {
   width: 20%;
+}
+
+.nextBT {
+  width: 200px;
+  height: 50px;
 }

@@ -1,16 +1,22 @@
 function post() {
   var checkedInput = document.querySelectorAll("input:checked");
   var stage = document.querySelector("input[name=stage]").value;
+  var clusterImgs = document.querySelectorAll(".cluster-imgs");
+  console.log(clusterImgs);
   var data = {};
   if (checkedInput.length == 0) {
     alert("이상형을 선택해주세요!");
   } else {
+    document.querySelector(".candidate").classList.toggle("hidden");
     data["selected"] = {};
-    for (input of checkedInput) {
-      data["selected"][input.dataset.id] = input.dataset.value;
+    for (let i = 0; i < checkedInput.length; i++) {
+      data["selected"][checkedInput[i].dataset.id] =
+        checkedInput[i].dataset.value;
+      console.log(checkedInput[i].dataset.name - 1);
+      clusterImgs[checkedInput[i].dataset.name - 1].style = "";
     }
+    var loadingBT = document.querySelector(".loadingBT");
     data["stage"] = stage;
-
     data = JSON.stringify(data).replace("\n", "");
     fetch("", {
       body: data,
@@ -21,20 +27,50 @@ function post() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        if (res.result == false) {
-          document.querySelector("article.container").innerHTML = res.render;
-        } else {
-          document.querySelector("div.container-wrapper").innerHTML =
-            res.render;
-        }
+        loadingBT.addEventListener("click", function (e) {
+          ResRender(res.result, res.render);
+        });
+        loadingBT.classList.toggle("inact");
+        loadingBT.innerHTML = "<p>다음 단계로</p>";
+        return res;
       });
-    document.querySelector(".candidate").classList.toggle("hidden");
   }
 }
 
-document.querySelector(".SelectBT_text>p").addEventListener("click", post);
+function inputCheck() {
+  var input = document.querySelectorAll("input.input-checkbox");
+  var checkedInput = document.querySelectorAll("input.input-checkbox:checked");
+  if (checkedInput.length > input.length / 2) {
+    alert(`${input.length / 2}명만 골라주세요~`);
+    return false;
+  }
+  return true;
+}
 
+function ResRender(result, renderTxt) {
+  if (result == false) {
+    document.querySelector("article.container").innerHTML = renderTxt;
+  } else {
+    document.querySelector("div.container-wrapper").innerHTML = renderTxt;
+  }
+}
+document.addEventListener("click", function (e) {
+  console.log(e.target);
+  if (document.querySelector(".SelectBT").contains(e.target)) {
+    post();
+  }
+  if (e.target.classList.contains("input-checkbox")) {
+    if (e.target.classList.contains("input-checkbox")) {
+      if (!inputCheck()) {
+        e.target.checked = false;
+      }
+    }
+  }
+});
+// document.querySelector(".SelectBT_text>p").addEventListener("click", post);
+// document.querySelector(".photos").addEventListener("click", function (e) {
+//   console.log(e.target.classList);
+// });
 window.requestAnimFrame = (function () {
   return (
     window.requestAnimationFrame ||

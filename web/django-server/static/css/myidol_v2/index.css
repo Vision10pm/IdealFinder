@@ -6,7 +6,7 @@
   -webkit-box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: fit-content;
+  /* height: fit-content; */
 }
 a {
   text-decoration: none;
@@ -18,8 +18,8 @@ body {
   width: 100%;
 }
 
-.hidden {
-  display: none;
+.unvisible {
+  visibility: hidden;
 }
 
 .header {
@@ -73,7 +73,6 @@ article.container {
 
 .photos .view_1 {
   width: 30%;
-  /* left: -200px; */
   top: 10px;
   z-index: 1;
 }
@@ -274,6 +273,7 @@ input:checked + label > .viewBox {
   line-height: 400%;
   border-radius: 10px;
   padding: 5px;
+  z-index: 99;
 }
 
 .SelectBT:hover {
@@ -295,6 +295,18 @@ input:checked + label > .viewBox {
 
 .SelcetBT:active {
   background-color: red;
+}
+/* loadingBT */
+.loadingBT {
+  position: relative;
+  background-color: rgb(249, 223, 123);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  line-height: 400%;
+  border-radius: 10px;
+  padding: 5px;
+  cursor: pointer;
 }
 
 /* rank BT */
@@ -367,4 +379,17 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -1;
+}
+
+.hidden {
+  display: none;
+}
+
+.inact {
+  background-color: dimgray;
+  cursor: initial;
+}
+
+.inact:hover {
 }

@@ -33,7 +33,7 @@ class process(APIView):
         return render(request, 'myidol_v2/process.html', context=pro_response.__dict__)
 
     def post(self, request):
-        reqeust_time = datetime.datetime.now()
+        request_time = datetime.datetime.now()
         gender = request._request.GET.get("gender")
         json_body = json.loads(request.body)
         prev_stage = int(json_body.get('stage', 1))
@@ -49,15 +49,11 @@ class process(APIView):
                 print(e)
         for id in selected_ids:
             selected_embeddings.append(json.loads(EmbeddingInfo.objects.get(image_id_id=id).embedding))
-        kmean_result = myidol_v2.modules.get_response(ids=selected_ids, embeddings=selected_embeddings, stage=prev_stage+1, choices=curr_selected_sample)
+        kmean_result = myidol_v2.modules.get_response(ids=selected_ids, embeddings=selected_embeddings, stage=prev_stage+1, choices=curr_selected_sample, gender=gender)
         pro_response = ProcessResponse(request=request, gender=gender, params = kmean_result, choices='', stage=prev_stage+1)
         response_time = datetime.datetime.now()
-        time.sleep(5-(response_time-reqeust_time).seconds)
+        time.sleep(2-(response_time-request_time).seconds)
         return pro_response.json_reponse()
-        if pro_response.params.get('result'):
-            return render(request, 'myidol_v2/result.html', context=pro_response.__dict__)
-        else:
-            return render(request, 'myidol_v2/process_response.html', context=pro_response.__dict__)
 
 
 class Result(APIView):
