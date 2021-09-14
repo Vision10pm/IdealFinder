@@ -11,12 +11,13 @@ import random, json, datetime, os, time
 import myidol_v2.modules
 
 # Create your views here.
-def home(request):
-    choices = request.GET.get('choices', '')
-    gender = request.GET.get('gender', '')
-    home_response = HomeResponse()
-    print(home_response.__dict__)
-    return render(request, 'myidol_v2/index.html', context=home_response.__dict__)
+class Home(APIView):
+    def get(self, request):
+        choices = request.GET.get('choices', '')
+        gender = request.GET.get('gender', '')
+        home_response = HomeResponse()
+        print(home_response.__dict__)
+        return render(request, 'myidol_v2/index.html', context=home_response.__dict__)
 
 class process(APIView):
     def get(self, request):

@@ -95,6 +95,8 @@ class ProcessResponse(ImageResponse):
 
     def json_reponse(self):
         return JsonResponse({'result': self.params.get('result'), 'render': self.render.content.decode('utf-8')})
+
+
 class ResultReponse(ImageResponse):
     def __init__(self, **kwargs):
         super().__init__()
