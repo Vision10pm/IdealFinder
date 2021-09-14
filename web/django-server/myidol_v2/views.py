@@ -55,6 +55,14 @@ class process(APIView):
         time.sleep(2-(response_time-request_time).seconds)
         return pro_response.json_reponse()
 
+class Similarity(APIView):
+    def get(self, request):
+        # sim_response = SimilarityResponse()
+        sim_response = {}
+        return render(request, 'myidol_v2/similarity.html', context=sim_response)
+    def post(self, request):
+        pass
+        # from keras
 
 class Result(APIView):
     def get(self, request):

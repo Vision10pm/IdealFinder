@@ -21,7 +21,7 @@
     </div>
     <div class="container-wrapper">
       <article class="container">
-        <div class="photos">
+        <!-- <div class="photos">
           {% for c in cluster_info_li %}
             {% if forloop.counter < 4 %}
               <div class="view_{{forloop.counter}} moveview">
@@ -34,7 +34,34 @@
             {% endif %}
           {% endfor %}
         </div>
-        <div class="shadow_main moveview"></div>
+        
+        <div class="shadow_main moveview"></div> -->
+        <div class="main_photos">
+          <div class="main_view_1 main_moveview">
+              <div class="main_viewBox">
+                  <div class="main_photo_img">
+                      <img id="pic" src="{% static 'img/photo/first_pic.jpg' %}">
+                  </div>
+              </div>
+          </div>
+          <div class="main_view_2 main_moveview">
+              <div class="main_viewBox">
+                  <div class="main_photo_img">
+                      <img id="pic" src="{% static 'img/photo/second_pic.jpg' %}">
+                  </div>
+              </div>
+          </div>
+          <div class="main_view_3 main_moveview">
+              <div class="main_viewBox">
+                  <div class="main_photo_img">
+                      <img id="pic" src="{% static 'img/photo/third_pic.jpg' %}">
+                  </div>
+              </div>
+          </div>
+          <div class="shadow_main main_moveview">
+  
+          </div>
+      </div>
         <div class="tail">
           <div class="startBT">
             <div class="startBT_text">
