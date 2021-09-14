@@ -6,5 +6,6 @@ urlpatterns = [
     path('process', views.process.as_view()),
     path('result', views.Result.as_view()),
     path('similarity', views.Similarity.as_view()),
+    
     # path('start/<int:stage>/', )
 ]

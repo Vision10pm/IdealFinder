@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'myidol',
     'myidol_v2',
+    'modeling',
 ]
 
 MIDDLEWARE = [

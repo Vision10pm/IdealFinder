@@ -1,20 +1,14 @@
 {% load static %}
-<div class="photos">
-  <div class="rank_icon">
-    <img src="img/icon/rank.PNG"/>
-  </div>
+<div class="result_txt_box">
+  <h1 class="result_txt">💖최종 이상형 TOP 5💖</h1>
+</div>
+<div class="rank_photos">
   <div class="photos">
-    <div class="rank_icon">
-      <img src="img/icon/rank.PNG"/>
-    </div>
     {%with cluster_info_dict.0.nearest as n%}
     {%for img in n%}
       {%if forloop.counter < 6%}
-        <div class="rank_{{forloop.counter}} rankBoxMK moveview">
+        <div class="rank_1 rankBoxMK moveview">
           <div class="viewBox">
-            <div class="boxCrown">
-              <img src="img/icon/crown.png"/>
-            </div>
             <div class="photo_img">
               <img id="imageTest" src="{% static 'img/' %}/{{gender}}/{{img.get_file_name}}"/>
             </div>
@@ -22,7 +16,7 @@
         </div>
         {%endif%}
       {% endfor %}
-      {% endwith %}
+    {% endwith %}
     </div>
   </div>
   <div class="tail">

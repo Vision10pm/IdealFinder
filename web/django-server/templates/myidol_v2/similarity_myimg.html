@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    {% include 'myidol_v2/header.html' %}
+    <link
+      rel="stylesheet"
+      href="../../static/css/myidol_v2/similarity_myimg.css"
+    />
+  </head>
+  <body>
+    <div id="image_container">
+      <img id="imageTest" src="../../static/img/photo/imgeTest.PNG" />
+      <img id="upload_img" src="../../static/img/photo/upload.jpg" />
+    </div>
+    <script>
+      function setThumbnail(event) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          var img = document.getElementById("upload_img");
+          img.setAttribute("src", event.target.result);
+          document.querySelector("div#image_container").appendChild(img);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    </script>
+
+    <div class="input_img">
+      <input
+        type="file"
+        id="image"
+        accept="image/*"
+        onchange="setThumbnail(event);"
+      />
+    </div>
+    <div class="score">
+      <div class="str_txt">이상형과의 유사도 점수는 &nbsp;</div>
+      <div class="score_txt">00점&nbsp;</div>
+      <div class="str_txt">입니다.</div>
+    </div>
+    {% include 'myidol_v2/script.html' %}
+  </body>
+</html>

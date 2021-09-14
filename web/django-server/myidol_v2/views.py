@@ -7,6 +7,7 @@ from rest_framework import status
 from myidol_v2.response import ProcessResponse, HomeResponse, ResultReponse
 from myidol.models import ImageInfo, EmbeddingInfo
 from myidol_v2.modules import kmeans, get_response
+from modeling.process import get_embedding
 import random, json, datetime, os, time
 import myidol_v2.modules
 
@@ -53,13 +54,17 @@ class process(APIView):
         kmean_result = myidol_v2.modules.get_response(ids=selected_ids, embeddings=selected_embeddings, stage=prev_stage+1, choices=curr_selected_sample, gender=gender)
         pro_response = ProcessResponse(request=request, gender=gender, params = kmean_result, choices='', stage=prev_stage+1)
         response_time = datetime.datetime.now()
-        time.sleep(2-(response_time-request_time).seconds)
+        time.sleep(max(0, 2-(response_time-request_time).seconds))
         return pro_response.json_reponse()
 
 class Similarity(APIView):
     def get(self, request):
         # sim_response = SimilarityResponse()
+        print(datetime.datetime.now())
+        get_embedding()
         sim_response = {}
+        print(datetime.datetime.now())
+        return render(request, 'myidol_v2/similarity_myimg.html', context={})
         return render(request, 'myidol_v2/similarity.html', context=sim_response)
     def post(self, request):
         pass
