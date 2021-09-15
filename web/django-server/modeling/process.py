@@ -5,10 +5,11 @@ from pathlib import Path
 from PIL import Image
 from myidol.models import EmbeddingInfo, ImageInfo
 from mtcnn.mtcnn import MTCNN
-import os, random, joblib
+import os, random, joblib, json
 import sqlite3
 import tensorflow as tf
 from tensorflow.keras.models import load_model
+import cv2
 MODEL_PATH  = os.path.join(os.path.dirname(__file__))
 DATASET_PATH = os.path.join(os.path.dirname(__file__), 'dataset')
 DB_PATH = os.path.join(os.path.dirname(MODEL_PATH), 'db.sqlite3')
@@ -57,60 +58,51 @@ def embedding_to_db(path, target_table, preprocess=False, db=DB_PATH):
 #     db_df.map(lambda x: EmbeddingInfo.objects.get(image_id_id=x['image_id_id']).update(embedding=x[1:129]))
 #     con.close()
 
-def extract_face(filename, required_size=(160, 160), save=False):
-    print(filename)
-    # 파일에서 이미지 불러오기
-    image = Image.open(filename)
+def extract_face(image, required_size=(160, 160), save=False):
     # RGB로 변환, 필요시
-    image = image.convert('RGB')
+    # image = image.convert('RGB')
     # 배열로 변환
-    pixels = np.asarray(image)
+    # pixels = np.array(image)
     # 감지기 생성, 기본 가중치 이용
     detector = MTCNN()
     # 이미지에서 얼굴 감지
-    results = detector.detect_faces(pixels)
+    results = detector.detect_faces(image)
     # 첫 번째 얼굴에서 경계 상자 추출
     # detect_faces의 결과물 : box, cofidence, keypoints(left_eye, right_eye, nose, mouth_left, mouth_right)
     # 사진 크기가 너무 작아서 detect가 안되는 경우가 있음 -> 우선 그런 영상들을 제외하고 진행
     if len(results)==0:
         return np.asarray([])
     x1, y1, width, height = results[0]['box']
+    
     # 버그 수정
     x1, y1 = abs(x1), abs(y1)
     x2, y2 = x1 + width, y1 + height
     # 얼굴 추출
-    face = pixels[y1:y2, x1:x2]
+    face = image[y1:y2, x1:x2]
     # 모델 사이즈로 픽셀 재조정
     # Image.fromarray() : 배열 객체를 입력으로 받아 배열 객체에서 만든 이미지 객체를 반환
     image = Image.fromarray(face)
     image = image.resize(required_size)
-    # face data 저장
-    if save == True:
-        face_path = filename.split('/')
-        jpg = face_path[-1].split('.')[0]+'.jpg'
-        face_path[-1] = jpg
-        face_path.insert(-2,'face_data')
-        face_path = os.path.join(*face_path)
-        image.save(face_path)
+
     return image
 
-def get_embedding():
-    
-    file = ImageInfo.objects.get(id=random.randint(1, 1200))
-    face_pixels = np.array(extract_face('/home/june/projects/kdt-server/IdealFinder/web/django-server/static/img/'+file.gender+'/'+file.get_file_name()))
-    print(face_pixels)
-    modelFile = '/home/june/projects/kdt-server/IdealFinder/web/django-server/modeling/facenet_keras.h5'
-    # pipe = joblib.load(modelFile.replace('.h5','.pkl'))
-    model = load_model(filepath=modelFile)
-    # pipe.steps.append(('nn', model))
-    # model = load_model(filepath='/home/june/projects/kdt-server/IdealFinder/web/django-server/modeling/facenet_keras.h5')
+def get_embedding_diff(user_img, width, height, image_id):
+    face_pixels = np.asarray(user_img)
+    face_pixels = face_pixels.reshape(height, width, 3).astype(np.uint8)
+    face_pixels = np.array(extract_face(face_pixels))
     # 픽셀 값의 척도
-    face_pixels = face_pixels.astype('int32')
     # 채널 간 픽셀값 표준화(전역에 걸쳐)
     mean, std = face_pixels.mean(), face_pixels.std()
     face_pixels = (face_pixels - mean) / std
     samples = np.expand_dims(face_pixels, axis=0)
     # 임베딩을 갖기 위한 예측 생성
-    embedding = model.predict(samples)
-    print(embedding)
-    return embedding
+    modelFile = '/home/june/projects/kdt-server/IdealFinder/web/django-server/modeling/facenet_keras.h5'
+    model = load_model(filepath=modelFile)
+    user_embedding = model.predict(samples)
+    # print(embedding)
+    ideal_embedding = json.loads(EmbeddingInfo.objects.select_related().get(image_id_id=image_id).embedding)
+
+    return get_score(user_embedding, ideal_embedding)
+
+def get_score(a, b):
+    return int(((np.dot(a, b) / (np.linalg.norm(a) * (np.linalg.norm(b))))+1)*50)

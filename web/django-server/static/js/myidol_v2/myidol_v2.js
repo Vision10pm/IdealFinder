@@ -2,7 +2,6 @@ function post() {
   var checkedInput = document.querySelectorAll("input:checked");
   var stage = document.querySelector("input[name=stage]").value;
   var clusterImgs = document.querySelectorAll(".cluster-imgs");
-  console.log(clusterImgs);
   var data = {};
   if (checkedInput.length == 0) {
     alert("이상형을 선택해주세요!");
@@ -12,7 +11,6 @@ function post() {
     for (let i = 0; i < checkedInput.length; i++) {
       data["selected"][checkedInput[i].dataset.id] =
         checkedInput[i].dataset.value;
-      console.log(checkedInput[i].dataset.name - 1);
       clusterImgs[checkedInput[i].dataset.name - 1].style = "";
     }
     var loadingBT = document.querySelector(".loadingBT");

@@ -45,7 +45,6 @@ def get_near_five(center=[], cluster=[], gender=None, is_result=False):
     embeddings = np.array([np.array(c[1]) for c in center])
     if len(cluster) < 6 and is_result:
         cluster_ = EmbeddingInfo.objects.select_related().filter(image_id_id__gender = gender)
-        print(json.loads(cluster_[0].embedding)[0])
         cluster = [(embedding_info.image_id_id, json.loads(embedding_info.embedding)) for embedding_info in cluster_]
     average_embed = embeddings.sum(axis=0) / len(center)
     cluster.sort(key=lambda x: euclidean_dist(average_embed, x[1]))

@@ -7,7 +7,7 @@ from rest_framework import status
 from myidol_v2.response import ProcessResponse, HomeResponse, ResultReponse
 from myidol.models import ImageInfo, EmbeddingInfo
 from myidol_v2.modules import kmeans, get_response
-from modeling.process import get_embedding
+from modeling.process import get_embedding_diff
 import random, json, datetime, os, time
 import myidol_v2.modules
 
@@ -39,7 +39,6 @@ class process(APIView):
         gender = request._request.GET.get("gender")
         json_body = json.loads(request.body)
         prev_stage = int(json_body.get('stage', 1))
-        print('prev stage:', json_body.get('stage'))
         curr_selected_sample = []
         selected_ids = []
         selected_embeddings = []
@@ -59,16 +58,23 @@ class process(APIView):
 
 class Similarity(APIView):
     def get(self, request):
-        # sim_response = SimilarityResponse()
-        print(datetime.datetime.now())
-        get_embedding()
         sim_response = {}
-        print(datetime.datetime.now())
-        return render(request, 'myidol_v2/similarity_myimg.html', context={})
-        return render(request, 'myidol_v2/similarity.html', context=sim_response)
+        sim_response['image_info'] = ImageInfo.objects.get(id=request.GET.get('id'))
+        print(sim_response)
+        return render(request, 'myidol_v2/similarity_myimg.html', context=sim_response)
     def post(self, request):
-        pass
-        # from keras
+        image_id = request._request.GET.get("id")
+        json_body = json.loads(request.body)
+        user_img = list(map(int, json_body.get('user_img').split(",")))
+        width = json_body.get('width')
+        height = json_body.get('height')
+        status_code = 200
+        try:
+            score = get_embedding_diff(user_img, width, height, image_id)
+        except Exception as e:
+            status_code = 400
+
+        return JsonResponse(data={'status_code': status_code, 'score': score})
 
 class Result(APIView):
     def get(self, request):
@@ -77,3 +83,5 @@ class Result(APIView):
         ret_response = ResultReponse(gender=gender, choices=choices)
         print(ret_response.__dict__)
         return render(request, 'myidol_v2/result.html', context=ret_response.__dict__)
+    def post(self, request):
+        pass
