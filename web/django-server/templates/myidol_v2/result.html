@@ -12,6 +12,7 @@
             <div class="photo_img">
               <img id="imageTest" src="{% static 'img/' %}{{gender}}/{{img.get_file_name}}"/>
             </div>
+            <div class="name">{{img.name}}</div>
           </div>
         </div>
         {%endif%}
@@ -21,30 +22,31 @@
   </div>
   <div class="result_tail">
     <div class="first">
-      <div class="rankBT">
-        <div class="rankBT_text">
-          <p>
-            <a href="/">메인으로</a>
-          </p>
+      <a href="/">
+        <div class="rankBT">
+          <div class="rankBT_text">
+            <p>메인으로
+            </p>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
     <div class="second">
-      <div class="rankBT">
-        <div class="rankBT_text">
-          <p>
-            <a href="">다시 시작</a>
-          </p>
+      <a href="">
+        <div class="rankBT">
+          <div class="rankBT_text">
+            <p>다시 시작</p>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
     <div class="third">
-    <div class="rankBT">
-      <div class="rankBT_text">
-        <p>
-          <a href="./similarity?id={{cluster_info_dict.0.image_info.id}}">My Some</a>
-        </p>
-      </div>
-    </div>
+      <a href="./similarity?id={{cluster_info_dict.0.image_info.id}}">
+        <div class="rankBT">
+          <div class="rankBT_text">
+            <p>My Some</p>
+          </div>
+        </div>
+      </a>
     </div>
   </div>

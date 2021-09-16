@@ -96,7 +96,7 @@ def get_face_embedding(user_img=None, width=None, height=None):
     face_pixels = (face_pixels - mean) / std
     samples = np.expand_dims(face_pixels, axis=0)
     # 임베딩을 갖기 위한 예측 생성
-    modelFile = '/home/june/projects/kdt-server/IdealFinder/web/django-server/modeling/facenet_keras.h5'
+    modelFile = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'facenet_keras.h5')
     model = load_model(filepath=modelFile)
     user_embedding = model.predict(samples)
     return user_embedding

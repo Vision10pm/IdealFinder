@@ -13,20 +13,6 @@
     <div id="image_container">
       <img id="upload_img" src="{% static 'img/photo/upload.jpg' %}"/>
     </div>
-    {% comment %} <script>
-      function setThumbnail(event) {
-        var reader = new FileReader();
-        reader.onload = function (event) {
-          var img = document.getElementById("upload_img");
-          img.setAttribute("src", event.target.result);
-          document
-            .querySelector("div#image_container")
-            .appendChild(img);
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      }
-    </script> {% endcomment %}
-
     <div class="input_img">
       <input disabled="true" type="file" id="image" accept="image/*"/>
     </div>
@@ -42,6 +28,17 @@
             </div>
           </div>
         {% endfor %}
+      </div>
+    </div>
+    <div class="tail">
+      <div class="first">
+        <a href="/">
+          <div class="startBT">
+            <div class="startBT_text">
+              <p>메인으로</p>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
     {% include 'myidol_v2/script.html' %}

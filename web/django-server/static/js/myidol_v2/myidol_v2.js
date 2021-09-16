@@ -29,7 +29,7 @@ function post() {
           ResRender(res.result, res.render);
         });
         loadingBT.classList.toggle("inact");
-        loadingBT.innerHTML = "<p>다음 단계로</p>";
+        loadingBT.innerHTML = "<div class='loadingBT_txt'><p>다음 단계로</p></div>";
         return res;
       });
   }

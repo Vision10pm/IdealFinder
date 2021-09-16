@@ -283,11 +283,18 @@ input:checked + label > .viewBox {
   text-align: center;
 }
 
+.tail > * {
+  cursor: pointer;
+}
+
 .result_tail {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
+  width: 30vw;
   height: 40px;
-  margin: 3% 37%;
+  margin: 0 auto;
+  justify-content: space-evenly;
   text-align: center;
 }
 
@@ -341,7 +348,7 @@ input:checked + label > .viewBox {
 }
 .SelectBT:active {
   background-color: red;
-  animation: vibration 0.5s;
+  /* animation: vibration 0.5s; */
 }
 .SelectBT .SelectBT_text {
   margin: 2px;
@@ -360,8 +367,6 @@ input:checked + label > .viewBox {
 .loadingBT {
   position: relative;
   background-color: rgb(249, 223, 123);
-  left: 50%;
-  transform: translateX(-50%);
   width: 200px;
   line-height: 400%;
   border-radius: 10px;
@@ -372,15 +377,24 @@ input:checked + label > .viewBox {
   margin-top: 20px;
 }
 
+.loadingBT .loadingBT_text {
+  margin: 2px;
+  border: 4px dashed white;
+  border-radius: 10px;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+}
+
 /* rank BT */
 .rankBT {
   position: relative;
   background-color: rgb(249, 223, 123);
-  /* transform: translateX(-50%); */
   width: 200px;
   line-height: 400%;
   border-radius: 10px;
   padding: 5px;
+  margin-top: 30px;
 }
 
 .rankBT:hover {
@@ -450,7 +464,7 @@ canvas {
 
 .inact {
   background-color: dimgray;
-  cursor: initial;
+  cursor: auto;
 }
 
 .inact:hover {

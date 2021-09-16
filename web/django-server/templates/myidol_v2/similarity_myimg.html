@@ -28,20 +28,6 @@
         <img id="imageTest" src="{% static 'img/'%}{{image_info.gender}}/{{image_info.get_file_name}}" />
         <img id="upload_img" src="/static/img/photo/upload.jpg" />
       </div>
-      {% comment %}
-      <script>
-        function setThumbnail(event) {
-          var reader = new FileReader();
-          reader.onload = function (event) {
-            var img = document.getElementById("upload_img");
-            img.setAttribute("src", event.target.result);
-            document.querySelector("div#image_container").appendChild(img);
-          };
-          reader.readAsDataURL(event.target.files[0]);
-        }
-      </script>
-      {% endcomment %}
-
       <div class="input_img">
         <input disabled="true" type="file" id="image" accept="image/*" />
       </div>
@@ -50,9 +36,19 @@
         <div class="score_txt"><span class="score-int">??</span>점&nbsp;</div>
         <div class="str_txt">입니다.</div>
       </div>
+      <div class="tail">
+        <div class="first">
+          <a href="/">
+            <div class="startBT">
+              <div class="startBT_text">
+                <p>메인으로</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
 
-    {% comment %} <canvas id="canvasOutput"></canvas> {% endcomment %}
     <script src="{% static 'js/myidol_v2/similarity.js' %}"></script>
     {% include 'myidol_v2/script.html' %}
 

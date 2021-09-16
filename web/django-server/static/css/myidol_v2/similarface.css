@@ -18,7 +18,6 @@
 
 img {
   width: 100%;
-  height: 100%;
 }
 
 .score {
@@ -57,7 +56,6 @@ img {
 
 .photo_img1 {
   width: 200px;
-  height: 200px;
   align-items: center;
   margin: 0 auto;
 }
