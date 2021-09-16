@@ -2,10 +2,9 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    {% include 'myidol_v2/header.html' %}
     <link
       rel="stylesheet"
-      href="../../static/css/myidol_v2/similarity_myimg.css"
+      href="/static/css/myidol_v2/similarity_myimg.css"
     />
     <script
       async
@@ -15,36 +14,47 @@
     ></script>
   </head>
   <body>
-    {% csrf_token %}
-    <div id="image_container">
-      <img id="imageTest" src="{% static 'img/'%}{{image_info.gender}}/{{image_info.get_file_name}}" />
-      <img id="upload_img" src="../../static/img/photo/upload.jpg" />
+    <header>
+      {% include 'myidol_v2/header.html' %}
+    </header>
+    <div class="line">
+      <div class="lineBr">
+        <p style="color: white">line</p>
+      </div>
     </div>
-    {% comment %}
-    <script>
-      function setThumbnail(event) {
-        var reader = new FileReader();
-        reader.onload = function (event) {
-          var img = document.getElementById("upload_img");
-          img.setAttribute("src", event.target.result);
-          document.querySelector("div#image_container").appendChild(img);
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      }
-    </script>
-    {% endcomment %}
+    <div class="container-wrapper">
+      {% csrf_token %}
+      <div id="image_container">
+        <img id="imageTest" src="{% static 'img/'%}{{image_info.gender}}/{{image_info.get_file_name}}" />
+        <img id="upload_img" src="/static/img/photo/upload.jpg" />
+      </div>
+      {% comment %}
+      <script>
+        function setThumbnail(event) {
+          var reader = new FileReader();
+          reader.onload = function (event) {
+            var img = document.getElementById("upload_img");
+            img.setAttribute("src", event.target.result);
+            document.querySelector("div#image_container").appendChild(img);
+          };
+          reader.readAsDataURL(event.target.files[0]);
+        }
+      </script>
+      {% endcomment %}
 
-    <div class="input_img">
-      <input disabled="true" type="file" id="image" accept="image/*" />
+      <div class="input_img">
+        <input disabled="true" type="file" id="image" accept="image/*" />
+      </div>
+      <div class="score">
+        <div class="str_txt">이상형과의 유사도 점수는 &nbsp;</div>
+        <div class="score_txt"><span class="score-int">??</span>점&nbsp;</div>
+        <div class="str_txt">입니다.</div>
+      </div>
     </div>
-    <div class="score">
-      <div class="str_txt">이상형과의 유사도 점수는 &nbsp;</div>
-      <div class="score_txt"><span class="score-int">??</span>점&nbsp;</div>
-      <div class="str_txt">입니다.</div>
-    </div>
-    <canvas id="canvasOutput"></canvas>
-    {% include 'myidol_v2/script.html' %}
+
+    {% comment %} <canvas id="canvasOutput"></canvas> {% endcomment %}
     <script src="{% static 'js/myidol_v2/similarity.js' %}"></script>
+    {% include 'myidol_v2/script.html' %}
 
   </body>
 </html>

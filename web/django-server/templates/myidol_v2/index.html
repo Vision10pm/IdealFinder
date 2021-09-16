@@ -8,73 +8,63 @@
 
   <body>
     {% include 'myidol_v2/header.html' %}
-
-    <div class="line">
-      <div class="lineBr">
-        <p style="color: white">line</p>
-      </div>
-    </div>
     <div class="header">
       <div class="header_title">
-        <p>이상형 찾기</p>
+        <p>Ideal Finder</p>
       </div>
     </div>
     <div class="container-wrapper">
       <article class="container">
-        <!-- <div class="photos">
-          {% for c in cluster_info_li %}
-            {% if forloop.counter < 4 %}
-              <div class="view_{{forloop.counter}} moveview">
-                <div class="viewBox">
-                  <div class="photo_img">
-                    <img src="{% static 'img/' %}{{c.image_id.gender}}/{{c.image_id.get_file_name}}" alt="{{c.image_id.name}}"/>
-                  </div>
-                </div>
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-        
-        <div class="shadow_main moveview"></div> -->
         <div class="main_photos">
           <div class="main_view_1 main_moveview">
-              <div class="main_viewBox">
-                  <div class="main_photo_img">
-                      <img id="pic" src="{% static 'img/photo/first_pic.jpg' %}">
-                  </div>
+            <div class="main_viewBox">
+              <div class="main_photo_img">
+                <img id="pic" src="{% static 'img/photo/first_pic.jpg' %}">
               </div>
-          </div>
-          <div class="main_view_2 main_moveview">
-              <div class="main_viewBox">
-                  <div class="main_photo_img">
-                      <img id="pic" src="{% static 'img/photo/second_pic.jpg' %}">
-                  </div>
-              </div>
-          </div>
-          <div class="main_view_3 main_moveview">
-              <div class="main_viewBox">
-                  <div class="main_photo_img">
-                      <img id="pic" src="{% static 'img/photo/third_pic.jpg' %}">
-                  </div>
-              </div>
-          </div>
-          <div class="shadow_main main_moveview">
-  
-          </div>
-      </div>
-        <div class="tail">
-          <div class="startBT">
-            <div class="startBT_text">
-              <p>
-                <a href="process?gender=female">여성 찾기</a>
-              </p>
             </div>
           </div>
-          <div class="startBT">
-            <div class="startBT_text">
-              <p>
-                <a href="process?gender=male">남성 찾기</a>
-              </p>
+          <div class="main_view_2 main_moveview">
+            <div class="main_viewBox">
+              <div class="main_photo_img">
+                <img id="pic" src="{% static 'img/photo/second_pic.jpg' %}">
+              </div>
+            </div>
+          </div>
+          <div class="main_view_3 main_moveview">
+            <div class="main_viewBox">
+              <div class="main_photo_img">
+                <img id="pic" src="{% static 'img/photo/third_pic.jpg' %}">
+              </div>
+            </div>
+          </div>
+          <div class="shadow_main main_moveview"></div>
+        </div>
+        <div class="tail">
+          <div class="first">
+            <div class="startBT">
+              <div class="startBT_text">
+                <p>
+                  <a href="process?gender=female">여성 찾기</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="second">
+            <div class="startBT">
+              <div class="startBT_text">
+                <p>
+                  <a href="process?gender=male">남성 찾기</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="third">
+            <div class="startBT">
+              <div class="startBT_text">
+                <p>
+                  <a href="./similarface">닮은꼴 찾기</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>

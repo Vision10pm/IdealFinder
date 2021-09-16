@@ -42,6 +42,11 @@
   margin: 0 auto;
 }
 
+.avail-wrapper {
+  font-size: larger;
+  margin: 20px auto;
+}
+
 .grid-item > label {
   width: 100%;
 }
@@ -74,13 +79,13 @@
 
 .grid-item:first-child:nth-last-child(4),
 .grid-item:first-child:nth-last-child(4) ~ .grid-item {
-  padding-top: 10%;
+  padding-top: 5%;
   width: 25%;
 }
 
 .grid-item:first-child:nth-last-child(2),
 .grid-item:first-child:nth-last-child(2) ~ .grid-item {
-  width: 50%;
+  width: 45%;
 }
 
 .cluster-imgs {
@@ -97,12 +102,7 @@ img.cand-1 {
   width: 13%;
 }
 
-.tail {
-  padding-top: 13vh;
-}
-
 .cluster_txt {
-  padding-top: 15px;
   text-align: center;
   font-weight: 700;
 }
@@ -111,7 +111,7 @@ img.cand-1 {
   display: block;
   height: 5vh;
   text-align: center;
-  margin: 15px;
+  margin: 7% 10%;
 }
 
 .candidate {
@@ -126,3 +126,11 @@ img.cand-1 {
   z-index: 999;
   overflow: scroll;
 }
+
+/* 영수님 수정 부분 */
+.progress_bar {
+  display: flex;
+  justify-content: center;
+}
+
+/* index 상속 css */

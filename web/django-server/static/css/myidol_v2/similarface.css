@@ -50,12 +50,14 @@ img {
   text-align : center;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  width: 80%;
-  margin: auto;
+  justify-content: space-evenly;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .photo_img1 {
-  width: 70%;
+  width: 200px;
+  height: 200px;
   align-items: center;
+  margin: 0 auto;
 }

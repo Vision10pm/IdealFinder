@@ -1,6 +1,6 @@
 {% load static %}
-<div class="result_txt_box">
-  <h1 class="result_txt">💖최종 이상형 TOP 5💖</h1>
+<div class="result_box">
+  <h1>💖최종 이상형 TOP 5💖</h1>
 </div>
 <div class="rank_photos">
   <div class="photos">
@@ -10,7 +10,7 @@
         <div class="rank_1 rankBoxMK moveview">
           <div class="viewBox">
             <div class="photo_img">
-              <img id="imageTest" src="{% static 'img/' %}/{{gender}}/{{img.get_file_name}}"/>
+              <img id="imageTest" src="{% static 'img/' %}{{gender}}/{{img.get_file_name}}"/>
             </div>
           </div>
         </div>
@@ -19,26 +19,32 @@
       {% endwith %}
     </div>
   </div>
-  <div class="tail">
+  <div class="result_tail">
+    <div class="first">
+      <div class="rankBT">
+        <div class="rankBT_text">
+          <p>
+            <a href="/">메인으로</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="second">
+      <div class="rankBT">
+        <div class="rankBT_text">
+          <p>
+            <a href="">다시 시작</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="third">
     <div class="rankBT">
       <div class="rankBT_text">
         <p>
-          <a href="/">메인으로</a>
+          <a href="./similarity?id={{cluster_info_dict.0.image_info.id}}">My Some</a>
         </p>
       </div>
     </div>
-    <div class="rankBT">
-      <div class="rankBT_text">
-        <p>
-          <a href="">다시 시작</a>
-        </p>
-      </div>
-    </div>
-    <div class="rankBT">
-      <div class="rankBT_text">
-        <p>
-          <a href="./similarity?id={{cluster_info_dict.0.image_info.id}}">Score of 썸people</a>
-        </p>
-      </div>
     </div>
   </div>

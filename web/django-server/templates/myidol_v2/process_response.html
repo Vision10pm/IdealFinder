@@ -1,65 +1,43 @@
-{% load static %} {% csrf_token %}
+{% load static %}
+{% csrf_token %}
 <div class="header">
-  <div class="header_title">
+  <div class="progress_bar">
     {% if cluster_info_dict.items|length == 8 %}
-    <img
-      class="progress"
-      id="now"
-      src="{%static 'img/photo/first_step.png'%}"
-    />
-    <img class="progress" src="{%static 'img/photo/simple_loading.gif'%}" />
-    <img class="progress" src="{%static 'img/photo/second_step.png'%}" />
-    <img class="progress" src="{%static 'img/photo/simple_loading.png'%}" />
-    <img class="progress" src="{%static 'img/photo/final_step.jpg'%}" />
+      <img class="progress" id="now" src="{%static 'img/photo/first_step.png'%}"/>
+      <img class="progress" src="{%static 'img/photo/simple_loading.gif'%}"/>
+      <img class="progress" src="{%static 'img/photo/second_step.png'%}"/>
+      <img class="progress" src="{%static 'img/photo/simple_loading.png'%}"/>
+      <img class="progress" src="{%static 'img/photo/final_step.jpg'%}"/>
     {% elif cluster_info_dict.items|length == 4 %}
-    <img class="progress" src="{%static 'img/photo/first_step.png'%}" />
-    <img class="progress" src="{%static 'img/photo/loading_done.png'%}" />
-    <img
-      class="progress"
-      id="now"
-      src="{%static 'img/photo/second_step.png'%}"
-    />
-    <img class="progress" src="{%static 'img/photo/simple_loading.gif'%}" />
-    <img class="progress" src="{%static 'img/photo/final_step.jpg'%}" />
+      <img class="progress" src="{%static 'img/photo/first_step.png'%}"/>
+      <img class="progress" src="{%static 'img/photo/loading_done.png'%}"/>
+      <img class="progress" id="now" src="{%static 'img/photo/second_step.png'%}"/>
+      <img class="progress" src="{%static 'img/photo/simple_loading.gif'%}"/>
+      <img class="progress" src="{%static 'img/photo/final_step.jpg'%}"/>
     {% else %}
-    <img class="progress" src="{%static 'img/photo/first_step.png'%}" />
-    <img class="progress" src="{%static 'img/photo/loading_done.png'%}" />
-    <img class="progress" src="{%static 'img/photo/second_step.png'%}" />
-    <img class="progress" src="{%static 'img/photo/loading_done.png'%}" />
-    <img
-      class="progress"
-      id="now"
-      src="{%static 'img/photo/final_step.jpg'%}"
-    />
+      <img class="progress" src="{%static 'img/photo/first_step.png'%}"/>
+      <img class="progress" src="{%static 'img/photo/loading_done.png'%}"/>
+      <img class="progress" src="{%static 'img/photo/second_step.png'%}"/>
+      <img class="progress" src="{%static 'img/photo/loading_done.png'%}"/>
+      <img class="progress" id="now" src="{%static 'img/photo/final_step.jpg'%}"/>
     {% endif %}
   </div>
 </div>
+{% with cluster_info_dict.items|length as len %}
+<div class="avail-wrapper"><span class="avail-check">{% widthratio len 2 1 %}</span>명 선택 가능</div>
+{% endwith %}
 <div class="photos">
   {% for c, v in cluster_info_dict.items %}
-  <div class="grid-item">
-    <input
-      type="checkbox"
-      id="togleBtn_{{forloop.counter}}"
-      class="input-checkbox"
-      style="visibility: hidden; position: absolute"
-      data-value="{{v.data}}"
-      data-id="{{v.image_info.id}}"
-      data-name="{{forloop.counter}}"
-    />
-    <label
-      for="togleBtn_{{forloop.counter}}"
-      class="select_{{forloop.counter}} selectBoxMK moveview"
-    >
-      <div class="viewBox">
-        <div class="photo_img">
-          <img
-            id="imageTest"
-            src="{% static 'img' %}/{{v.image_info.gender}}/{{v.image_info.get_file_name}}"
-          />
+    <div class="grid-item">
+      <input type="checkbox" id="togleBtn_{{forloop.counter}}" class="input-checkbox" style="visibility: hidden; position: absolute" data-value="{{v.data}}" data-id="{{v.image_info.id}}" data-name="{{forloop.counter}}"/>
+      <label for="togleBtn_{{forloop.counter}}" class="select_{{forloop.counter}} selectBoxMK moveview">
+        <div class="viewBox">
+          <div class="photo_img">
+            <img id="imageTest" src="{% static 'img' %}/{{v.image_info.gender}}/{{v.image_info.get_file_name}}"/>
+          </div>
         </div>
-      </div>
-    </label>
-  </div>
+      </label>
+    </div>
   {% endfor %}
 </div>
 <div class="candidate hidden">
@@ -67,18 +45,23 @@
     <h1 class="cluster_txt">💖당신이 선택한 이상형 후보들💖</h1>
   </div>
   {% for c, v in cluster_info_dict.items %}
-  <div class="cluster-imgs" style="display: none">
-    {%for img in v.nearest%}
-    <img
-      class="cand-{{forloop.counter}}"
-      src="{% static 'img' %}/{{img.gender}}/{{img.get_file_name}}"
-      alt=""
-    />
-    {%endfor%}
+    <div class="cluster-imgs" style="display: none">
+      {%for img in v.nearest%}
+        <img class="cand-{{forloop.counter}}" src="{% static 'img' %}/{{img.gender}}/{{img.get_file_name}}" alt=""/>
+        {%endfor%}
+      </div>
+    {% endfor %}
+    <div class="loadingBT inact">
+      <p>분석중</p>
+    </div>
   </div>
-  {% endfor %}
-  <div class="loadingBT inact">
-    <p>분석중</p>
+
+  <input type="text" name="stage" style="display: none" value="{{stage}}"/>
+
+  <div class="tail">
+    <div class="SelectBT">
+      <div class="SelectBT_text">
+        <p>선택</p>
+      </div>
+    </div>
   </div>
-</div>
-<input type="text" name="stage" style="visibility: hidden" value="{{stage}}" />
