@@ -7,6 +7,12 @@
       rel="stylesheet"
       href="../../static/css/myidol_v2/similarity_myimg.css"
     />
+    <script
+      async
+      src="https://docs.opencv.org/master/opencv.js"
+      type="text/javascript"
+      onload="onLoadOpenCV()"
+    ></script>
   </head>
   <body>
     {% csrf_token %}
@@ -29,7 +35,7 @@
     {% endcomment %}
 
     <div class="input_img">
-      <input type="file" id="image" accept="image/*" />
+      <input disabled="true" type="file" id="image" accept="image/*" />
     </div>
     <div class="score">
       <div class="str_txt">이상형과의 유사도 점수는 &nbsp;</div>
@@ -39,10 +45,6 @@
     <canvas id="canvasOutput"></canvas>
     {% include 'myidol_v2/script.html' %}
     <script src="{% static 'js/myidol_v2/similarity.js' %}"></script>
-    <script
-      async
-      src="https://docs.opencv.org/master/opencv.js"
-      type="text/javascript"
-    ></script>
+
   </body>
 </html>

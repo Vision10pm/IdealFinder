@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+    {% include 'myidol_v2/header.html' %}
+    <link rel="stylesheet" href="../../static/css/myidol_v2/similarface.css"/>
+    <script async="async" src="https://docs.opencv.org/master/opencv.js" onload="onLoadOpenCV()" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <h1 align="center">💖가장 닮은꼴 TOP 5💖</h1>
+    <div id="image_container">
+      <img id="upload_img" src="{% static 'img/photo/upload.jpg' %}"/>
+    </div>
+    <script>
+      function setThumbnail(event) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          var img = document.getElementById("upload_img");
+          img.setAttribute("src", event.target.result);
+          document
+            .querySelector("div#image_container")
+            .appendChild(img);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    </script>
+
+    <div class="input_img">
+      <input disabled="true" type="file" id="image" accept="image/*"/>
+    </div>
+    <div class="rank_photos1">
+      <div class="photos1">
+        {% for _ in range %}
+          <div>
+            <div class="viewBox1">
+              <div class="photo_img1">
+                <h3>{{forloop.counter}}위</h3>
+                <img id="imageTest" src="{% static 'img/photo/icon-suspect.svg' %}"/>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% include 'myidol_v2/script.html' %}
+    <script src="{% static 'js/myidol_v2/similarity.js' %}"></script>
+  </body>
+
+</html>

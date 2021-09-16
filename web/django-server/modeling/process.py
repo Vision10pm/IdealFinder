@@ -86,7 +86,7 @@ def extract_face(image, required_size=(160, 160), save=False):
 
     return image
 
-def get_embedding_diff(user_img, width, height, image_id):
+def get_face_embedding(user_img=None, width=None, height=None):
     face_pixels = np.asarray(user_img)
     face_pixels = face_pixels.reshape(height, width, 3).astype(np.uint8)
     face_pixels = np.array(extract_face(face_pixels))
@@ -99,10 +99,23 @@ def get_embedding_diff(user_img, width, height, image_id):
     modelFile = '/home/june/projects/kdt-server/IdealFinder/web/django-server/modeling/facenet_keras.h5'
     model = load_model(filepath=modelFile)
     user_embedding = model.predict(samples)
-    # print(embedding)
-    ideal_embedding = json.loads(EmbeddingInfo.objects.select_related().get(image_id_id=image_id).embedding)
+    return user_embedding
 
+
+def get_embedding_diff(user_img, width, height, image_id):
+    user_embedding = get_face_embedding(user_img, width, height)
+    ideal_embedding = json.loads(EmbeddingInfo.objects.select_related().get(image_id_id=image_id).embedding)
     return get_score(user_embedding, ideal_embedding)
+
+def get_similar_face(user_img, width, height):
+    user_embedding = get_face_embedding(user_img, width, height)
+    all_embedding = list(EmbeddingInfo.objects.select_related().all())
+    print(len(all_embedding))
+    print(all_embedding[0].image_id)
+
+    all_embedding.sort(key=lambda x: np.linalg.norm(list(map(int, json.loads(x.embedding)))-user_embedding))
+    print(all_embedding[:5])
+    return list(map(lambda x: f'/static/img/{x.image_id.gender}/{x.image_id.get_file_name()}', all_embedding[:5]))
 
 def get_score(a, b):
     return int(((np.dot(a, b) / (np.linalg.norm(a) * (np.linalg.norm(b))))+1)*50)

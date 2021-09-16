@@ -1,3 +1,7 @@
+function onLoadOpenCV() {
+  document.querySelector("input#image").disabled=false;
+}
+
 var blob = new Blob();
 const fr = new FileReader();
 function readImage(input) {
@@ -26,16 +30,13 @@ inputElement.addEventListener(
   false
 );
 
-console.log(inputElement);
 function post(mat, height, width) {
-  console.log(mat);
   var data = {};
   data["user_img"] = mat;
   data["height"] = height;
   data["width"] = width;
   data = JSON.stringify(data).replace("\n", "");
-  console.log([mat.data, mat.cols, mat.rows]);
-  fetch("", {
+  return fetch("", {
     body: data,
     headers: {
       "Content-Type": "application/json",
@@ -44,11 +45,16 @@ function post(mat, height, width) {
   })
     .then((res) => res.json())
     .then((res) => {
-      document.querySelector(".score-int").innerText = res.score;
+      // document.querySelector(".score-int").innerText = res.score;
       return res;
     });
 }
-
+function changeByJson(json) {
+  var target = document.querySelectorAll(json.selector);
+  for(let i=0; i < target.length; i++) {
+    target[i][json.attr] = json.values[i]
+  }
+}
 imgElement.onload = function () {
   let src = cv.imread(imgElement);
   let mat = new cv.Mat();
@@ -58,7 +64,10 @@ imgElement.onload = function () {
     new Uint8ClampedArray(mat.data, mat.cols, mat.rows).toString(),
     size.height,
     size.width
-  );
+  ).then((res) => {
+    changeByJson(res);
+  });
   mat.delete();
   return;
 };
+

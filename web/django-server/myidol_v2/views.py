@@ -7,7 +7,7 @@ from rest_framework import status
 from myidol_v2.response import ProcessResponse, HomeResponse, ResultReponse
 from myidol.models import ImageInfo, EmbeddingInfo
 from myidol_v2.modules import kmeans, get_response
-from modeling.process import get_embedding_diff
+from modeling.process import get_embedding_diff, get_similar_face
 import random, json, datetime, os, time
 import myidol_v2.modules
 
@@ -72,9 +72,24 @@ class Similarity(APIView):
         try:
             score = get_embedding_diff(user_img, width, height, image_id)
         except Exception as e:
+            score = '??'
             status_code = 400
 
-        return JsonResponse(data={'status_code': status_code, 'score': score})
+        return JsonResponse(data={"selector":"span.score-int", "attr": "innerText", "values": [score]})
+
+class Neighbor(APIView):
+    def get(self, request):
+        nei_response = {'range':range(5)}
+        return render(request, 'myidol_v2/similarface.html', context=nei_response)
+    def post(self, request):
+        json_body = json.loads(request.body)
+        user_img = list(map(int, json_body.get('user_img').split(",")))
+        width = json_body.get('width')
+        height = json_body.get('height')
+        image_info = get_similar_face(user_img, width, height)
+        print(image_info)
+        return JsonResponse(data={"selector":"img#imageTest", "attr": "src", "values": image_info})
+
 
 class Result(APIView):
     def get(self, request):

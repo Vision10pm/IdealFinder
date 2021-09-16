@@ -65,10 +65,15 @@ document.addEventListener("click", function (e) {
     }
   }
 });
-// document.querySelector(".SelectBT_text>p").addEventListener("click", post);
-// document.querySelector(".photos").addEventListener("click", function (e) {
-//   console.log(e.target.classList);
-// });
+document.addEventListener("change", function(e) {
+  if (e.target.className == "input-checkbox") {
+    var totalCnt = document.querySelectorAll("input.input-checkbox").length;
+    var currCnt = document.querySelectorAll("input.input-checkbox:checked").length;
+    console.log(totalCnt/2-currCnt);
+    document.querySelector(".avail-check").innerText = totalCnt/2-currCnt;
+  } 
+});
+
 window.requestAnimFrame = (function () {
   return (
     window.requestAnimationFrame ||
